@@ -3,14 +3,14 @@
 import { CornerDownRight } from 'lucide-react';
 import React from 'react';
 
-interface Node {
+export interface CustomNode {
     id: string;
     name: string;
-    child?: Node[];
+    child?: CustomNode[];
 }
 
 interface TreeNodeProps {
-    node: Node;
+    node: CustomNode;
     isRoot: boolean;
     selectedNode: string | null;
     setSelectedNode: (id: string) => void;
