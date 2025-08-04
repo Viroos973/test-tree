@@ -11,11 +11,11 @@ export default function Home() {
 
   return (
     <div className="font-sans flex flex-col justify-center items-center min-h-screen p-8 pb-20 sm:p-20">
-      <main className="flex flex-col w-full flex-1 border rounded-lg bg-[#FFF8F0] overflow-hidden">
+      <main className="flex flex-col w-full flex-1 max-h-[600px] border rounded-lg bg-[#FFF8F0] overflow-hidden">
           <div className="w-full py-2 bg-[#92140C]">
               <p className="text-center text-3xl font-bold text-white">TREE</p>
           </div>
-          <div className="flex-1">
+          <div className="flex-1 max-h-[600px] overflow-y-auto">
               <TreeNode node={state.tree} isRoot={true} selectedNode={state.selectedNode}
                         setSelectedNode={functions.setSelectedNode} enclosure={0} />
           </div>
