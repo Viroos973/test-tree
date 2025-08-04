@@ -34,10 +34,10 @@ export const useHome = () => {
 
     const findNode = (node: CustomNode, targetId: string): CustomNode | null => {
         let currentNode = node;
-        const path = targetId.split('').slice(1);
+        const path = targetId.split('-').slice(1);
 
         for (const childIdPart of path) {
-            const targetPath = currentNode.id + childIdPart;
+            const targetPath = `${currentNode.id}-${childIdPart}`;
             const foundChild = currentNode.child?.find(child =>
                 child.id === targetPath
             );
@@ -56,12 +56,13 @@ export const useHome = () => {
 
             if (parent && parent.child) {
                 const maxNumber = parent.child.reduce((max, child) => {
-                    const num = parseInt(child.id.slice(-1));
+                    const lastPart = child.id.split('-').pop();
+                    const num = parseInt(lastPart || '0');
                     return num > max ? num : max;
                 }, 0);
 
                 const newNode = {
-                    id: `${parent.id}${maxNumber + 1}`,
+                    id: `${parent.id}-${maxNumber + 1}`,
                     name: inputAdd.trim(),
                     child: []
                 };
@@ -79,7 +80,7 @@ export const useHome = () => {
 
         setTree(prevTree => {
             const newTree = JSON.parse(JSON.stringify(prevTree));
-            const parentId = selectedNode.slice(0, -1);
+            const parentId = selectedNode.substring(0, selectedNode.lastIndexOf('-'));
             const parent = findNode(newTree, parentId)
 
             if (parent && parent.child) {
